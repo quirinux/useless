@@ -1,0 +1,15 @@
+--username ${USER}
+--password ${PASSWORD:1234}
+--verbose
+--method POST
+
+# some coment
+foo=baz
+kaz:qux # another comment
+
+data="some random data"
+
+bool=true
+null=null
+int=1234
+float=12.34
