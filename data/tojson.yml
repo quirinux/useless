@@ -1,0 +1,5 @@
+foo: bar
+kaz: 1234
+qux: 12.34
+bool: true
+null: null

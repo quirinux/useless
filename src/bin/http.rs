@@ -115,6 +115,8 @@ impl Args {
                         self.url = "https://localhost".to_owned() + v;
                     } else if v.starts_with(":") {
                         self.url = "http://localhost".to_owned() + v;
+                    } else if v.starts_with("http") {
+                        self.url = val.into_string().expect("invalid url");
                     } else if v.contains(":") {
                         let kv: Vec<&str> = v.split(":").collect();
                         let k = kv[0];
@@ -127,6 +129,9 @@ impl Args {
                         let k = kv[0];
                         let v = kv[1..].join("");
                         self.body.insert(k.to_string(), v.to_string());
+                    } else if self.url.len() <= 0 {
+                        let url = val.into_string().expect("invalid url");
+                        self.url = format!("http://{}", url);
                     }
 
                 },
@@ -180,6 +185,10 @@ fn main() -> ExitCode {
     }
 
     // println!("{:?}", args);
+    if args.url.len() <= 0 {
+        eprintln!("missing url");
+        return ExitCode::FAILURE;
+    }
 
     if let Err(e) = args.prepare() {
         eprintln!("{:?}", e);

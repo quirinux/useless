@@ -13,7 +13,7 @@ fn grab_input() -> String {
         let arg = args[1].clone();
         match fs::read_to_string(&arg) {
             Ok(o) => return o.clone(),
-            Err(_) => { },
+            Err(_) => return io::stdin().lines().next().unwrap().unwrap(),
         }
     }
 
