@@ -143,7 +143,9 @@ impl Args {
 
     fn prepare(&mut self) -> Result<(), Box<dyn std::error::Error>> {
         let mut cb = reqwest::blocking::ClientBuilder::new();
-        cb = cb.default_headers(self.headers.clone());
+        cb = cb
+            .default_headers(self.headers.clone())
+            .danger_accept_invalid_certs(self.secure);
 
         if let Some(t) = self.timeout {
             cb = cb.timeout(t);
