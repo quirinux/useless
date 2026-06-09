@@ -145,7 +145,7 @@ impl Args {
         let mut cb = reqwest::blocking::ClientBuilder::new();
         cb = cb
             .default_headers(self.headers.clone())
-            .danger_accept_invalid_certs(self.secure);
+            .danger_accept_invalid_certs(!self.secure);
 
         if let Some(t) = self.timeout {
             cb = cb.timeout(t);
